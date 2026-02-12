@@ -9,7 +9,23 @@
 
 ## Запуск
 1. Скопируйте env: `cp .env.example .env`
-2. Запуск: `docker compose up --build`
+2. Выполните preflight: `npm run preflight`
+3. Запуск полного стенда в Docker: `npm run compose:up`
+
+### Альтернативные режимы запуска
+- Только инфраструктура (postgres/redis/minio/mock1c): `npm run compose:infra`
+- Только приложения локально без Docker: `npm run dev`
+- Остановить контейнеры: `npm run compose:down`
+
+## Если npm install даёт 403
+Проверьте и поправьте npm registry:
+
+```bash
+npm config get registry
+npm config set registry https://registry.npmjs.org/
+cat ~/.npmrc
+cat .npmrc
+```
 
 ## URL
 - Web: http://localhost:3000
@@ -20,7 +36,7 @@
 - Mock 1C: http://localhost:3100/health
 
 ## База данных
-Внутри контейнера API:
+Из корня репозитория:
 - `npm run db:migrate`
 - `npm run db:seed`
 
