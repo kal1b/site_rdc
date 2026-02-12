@@ -1,0 +1,13 @@
+{
+  "name": "vostok-28",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "infra/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w apps/api & npm run dev -w apps/web",
+    "build": "npm run build -ws",
+    "test": "npm run test -ws"
+  }
+}
