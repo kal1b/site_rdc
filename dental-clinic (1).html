@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МЦ «Доверие» — Многопрофильный медицинский центр г. Хэйхэ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --c-primary: #1a6b5a; --c-primary-light: #238c75; --c-primary-dark: #0f4a3e;
+  --c-accent: #c9a84c; --c-accent-light: #e0c36a;
+  --c-bg: #faf9f6; --c-bg-alt: #f0eeea; --c-bg-dark: #0d1f1a;
+  --c-text: #2c2c2c; --c-text-light: #6b6b6b; --c-white: #ffffff; --c-border: #e2dfd8;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Sans 3', sans-serif;
+  --radius: 12px; --shadow: 0 4px 24px rgba(0,0,0,0.06); --shadow-lg: 0 12px 48px rgba(0,0,0,0.1);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--c-text); background: var(--c-bg); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; height: auto; display: block; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HEADER */
+.header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(250,249,246,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--c-border); transition: var(--transition); }
+.header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--c-primary-dark); }
+.logo-icon { width: 42px; height: 42px; background: var(--c-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; }
+.logo-text { font-family: var(--font-display); font-size: 19px; font-weight: 600; letter-spacing: -0.5px; }
+.logo-sub { font-size: 10px; color: var(--c-text-light); font-weight: 400; display: block; letter-spacing: 0.3px; margin-top: -2px; }
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a { text-decoration: none; color: var(--c-text); font-size: 14px; font-weight: 500; position: relative; transition: var(--transition); }
+.nav a:hover { color: var(--c-primary); }
+.nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--c-primary); transition: var(--transition); }
+.nav a:hover::after { width: 100%; }
+.header-actions { display: flex; align-items: center; gap: 16px; }
+.header-phone { font-weight: 600; color: var(--c-primary-dark); text-decoration: none; font-size: 15px; }
+.header-phone:hover { color: var(--c-primary); }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; text-decoration: none; border: none; cursor: pointer; transition: var(--transition); font-family: var(--font-body); }
+.btn-primary { background: var(--c-primary); color: var(--c-white); box-shadow: 0 4px 16px rgba(26,107,90,0.3); }
+.btn-primary:hover { background: var(--c-primary-light); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(26,107,90,0.35); }
+.btn-outline { background: transparent; color: var(--c-primary); border: 2px solid var(--c-primary); }
+.btn-outline:hover { background: var(--c-primary); color: var(--c-white); }
+.btn-accent { background: var(--c-accent); color: var(--c-bg-dark); }
+.btn-accent:hover { background: var(--c-accent-light); transform: translateY(-2px); }
+.burger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+.burger span { display: block; width: 24px; height: 2px; background: var(--c-text); transition: var(--transition); }
+
+/* HERO */
+.hero { padding: 140px 0 80px; background: linear-gradient(135deg, var(--c-bg) 0%, #e8f0ee 50%, #d4e8e2 100%); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(26,107,90,0.08), transparent 70%); }
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(26,107,90,0.1); border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--c-primary); margin-bottom: 24px; letter-spacing: 0.5px; text-transform: uppercase; }
+.hero-badge::before { content: '✦'; font-size: 10px; }
+.hero h1 { font-family: var(--font-display); font-size: 46px; line-height: 1.15; font-weight: 700; color: var(--c-primary-dark); margin-bottom: 20px; letter-spacing: -1px; }
+.hero h1 em { font-style: normal; background: linear-gradient(120deg, var(--c-primary), var(--c-primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-desc { font-size: 17px; color: var(--c-text-light); margin-bottom: 32px; max-width: 500px; line-height: 1.8; }
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-stats { display: flex; gap: 40px; padding-top: 32px; border-top: 1px solid var(--c-border); }
+.hero-stat-num { font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--c-primary-dark); line-height: 1; }
+.hero-stat-label { font-size: 14px; color: var(--c-text-light); margin-top: 4px; }
+.hero-visual { position: relative; }
+.hero-img-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: 0 24px 80px rgba(26,107,90,0.15); aspect-ratio: 4/3; }
+.hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.hero-float-card { position: absolute; background: var(--c-white); border-radius: var(--radius); padding: 14px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; animation: float 3s ease-in-out infinite; }
+.hero-float-card.top-right { top: 16px; right: -16px; }
+.hero-float-card.bottom-left { bottom: 24px; left: -20px; animation-delay: 1.5s; }
+.float-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.float-icon.green { background: rgba(26,107,90,0.1); }
+.float-icon.gold { background: rgba(201,168,76,0.15); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* COMMON */
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-label { display: inline-block; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--c-primary); margin-bottom: 12px; }
+.section-title { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--c-primary-dark); line-height: 1.2; margin-bottom: 16px; }
+.section-desc { font-size: 17px; color: var(--c-text-light); max-width: 600px; margin: 0 auto; }
+
+/* VALUES */
+.value-section { padding: 80px 0; background: var(--c-white); }
+.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.value-card { background: var(--c-bg); border-radius: var(--radius); padding: 36px 28px; border: 1px solid var(--c-border); transition: var(--transition); position: relative; overflow: hidden; }
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--c-primary); }
+.value-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--c-primary), var(--c-accent)); opacity: 0; transition: var(--transition); }
+.value-card:hover::after { opacity: 1; }
+.value-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 20px; }
+.value-icon.v1 { background: rgba(26,107,90,0.1); } .value-icon.v2 { background: rgba(201,168,76,0.12); } .value-icon.v3 { background: rgba(100,149,237,0.12); }
+.value-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin-bottom: 10px; color: var(--c-primary-dark); }
+.value-card p { color: var(--c-text-light); font-size: 15px; }
+.value-highlight { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--c-primary); margin-top: 12px; display: block; }
+
+/* ABOUT */
+.about-section { padding: 100px 0; background: var(--c-bg); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-img-main { width: 100%; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+.about-img-main img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+.about-exp-badge { position: absolute; bottom: -20px; right: -20px; background: var(--c-primary); color: white; border-radius: var(--radius); padding: 20px 24px; box-shadow: var(--shadow-lg); }
+.about-exp-badge .num { font-family: var(--font-display); font-size: 36px; font-weight: 700; display: block; line-height: 1; }
+.about-exp-badge .label { font-size: 13px; opacity: 0.8; }
+.about-content .section-label { text-align: left; } .about-content .section-title { text-align: left; font-size: 36px; }
+.about-text { color: var(--c-text-light); font-size: 16px; margin-bottom: 24px; }
+.about-features { display: flex; flex-direction: column; gap: 16px; margin: 32px 0; }
+.about-feature { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 500; color: var(--c-text); }
+.about-check { width: 28px; height: 28px; border-radius: 50%; background: rgba(26,107,90,0.1); display: flex; align-items: center; justify-content: center; color: var(--c-primary); font-size: 14px; flex-shrink: 0; }
+
+/* GALLERY */
+.gallery-section { padding: 100px 0; background: var(--c-white); }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.gallery-item { border-radius: var(--radius); overflow: hidden; cursor: pointer; position: relative; transition: var(--transition); }
+.gallery-item:hover { transform: scale(1.02); z-index: 2; }
+.gallery-item img { width: 100%; height: 260px; object-fit: cover; transition: var(--transition); }
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-overlay { position: absolute; inset: 0; background: rgba(13,31,26,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay span { color: white; font-size: 28px; }
+
+/* CERTS */
+.certs-section { padding: 80px 0; background: linear-gradient(135deg, var(--c-bg) 0%, #e8f0ee 100%); }
+.certs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 800px; margin: 0 auto; }
+.cert-card { background: var(--c-white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--c-border); transition: var(--transition); cursor: pointer; }
+.cert-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.cert-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.cert-card-label { padding: 16px 20px; font-weight: 600; font-size: 14px; color: var(--c-primary-dark); text-align: center; }
+
+/* VIDEO */
+.video-section { padding: 100px 0; background: var(--c-bg-dark); color: white; }
+.video-section .section-label { color: var(--c-accent); } .video-section .section-title { color: white; } .video-section .section-desc { color: rgba(255,255,255,0.6); }
+.video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.video-card { border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: var(--transition); cursor: pointer; }
+.video-card:hover { border-color: var(--c-accent); transform: translateY(-4px); }
+.video-thumb { aspect-ratio: 16/9; background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center; position: relative; }
+.video-play-btn { width: 64px; height: 64px; border-radius: 50%; background: rgba(201,168,76,0.9); display: flex; align-items: center; justify-content: center; font-size: 24px; transition: var(--transition); }
+.video-card:hover .video-play-btn { transform: scale(1.1); background: var(--c-accent); }
+.video-label { padding: 16px 20px; font-weight: 600; font-size: 15px; color: rgba(255,255,255,0.8); }
+
+/* SERVICES */
+.services-section { padding: 100px 0; background: var(--c-white); }
+.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.service-card { background: var(--c-bg); border-radius: var(--radius); padding: 32px 24px; text-align: center; border: 1px solid var(--c-border); transition: var(--transition); cursor: pointer; text-decoration: none; color: inherit; display: block; }
+.service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--c-primary); background: var(--c-white); }
+.service-emoji { font-size: 42px; margin-bottom: 16px; display: block; }
+.service-card h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--c-primary-dark); margin-bottom: 8px; }
+.service-card p { font-size: 14px; color: var(--c-text-light); line-height: 1.6; }
+
+/* DOCTORS */
+.doctors-section { padding: 100px 0; background: linear-gradient(180deg, var(--c-bg-dark) 0%, #152e27 100%); color: white; }
+.doctors-section .section-label { color: var(--c-accent); } .doctors-section .section-title { color: white; } .doctors-section .section-desc { color: rgba(255,255,255,0.6); }
+.doctors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.doctor-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); overflow: hidden; transition: var(--transition); }
+.doctor-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(201,168,76,0.3); transform: translateY(-4px); }
+.doctor-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.doctor-info { padding: 28px; }
+.doctor-info h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+.doctor-title { color: var(--c-accent); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.doctor-desc { color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.7; }
+
+/* PRICING */
+.pricing-section { padding: 100px 0; background: var(--c-bg); }
+.pricing-table { background: var(--c-white); border-radius: var(--radius); border: 1px solid var(--c-border); overflow: hidden; box-shadow: var(--shadow); }
+.pricing-header { display: grid; grid-template-columns: 1fr 120px 120px 120px; padding: 16px 28px; background: var(--c-primary-dark); color: white; font-weight: 600; font-size: 14px; }
+.pricing-header span:not(:first-child) { text-align: center; }
+.pricing-row { display: grid; grid-template-columns: 1fr 120px 120px 120px; padding: 14px 28px; border-bottom: 1px solid var(--c-border); align-items: center; transition: var(--transition); font-size: 15px; }
+.pricing-row:hover { background: rgba(26,107,90,0.03); }
+.pricing-row:last-child { border-bottom: none; }
+.pricing-service { font-weight: 500; }
+.pricing-service small { font-size: 12px; color: var(--c-text-light); display: block; }
+.pricing-price { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--c-primary); text-align: center; }
+.pricing-category { padding: 12px 28px; background: var(--c-bg); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--c-text-light); border-bottom: 1px solid var(--c-border); }
+.pricing-note { padding: 20px 28px; background: rgba(26,107,90,0.04); font-size: 13px; color: var(--c-text-light); line-height: 1.6; border-top: 1px solid var(--c-border); }
+
+/* STEPS */
+.steps-section { padding: 100px 0; background: var(--c-white); }
+.steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.step-card { text-align: center; padding: 24px 16px; position: relative; }
+.step-card:not(:last-child)::after { content: '→'; position: absolute; right: -12px; top: 40px; font-size: 24px; color: var(--c-primary); opacity: 0.4; }
+.step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--c-primary); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 20px; font-weight: 700; margin: 0 auto 16px; }
+.step-card h3 { font-family: var(--font-display); font-size: 17px; font-weight: 600; margin-bottom: 8px; color: var(--c-primary-dark); }
+.step-card p { font-size: 14px; color: var(--c-text-light); line-height: 1.6; }
+
+/* REVIEWS */
+.reviews-section { padding: 100px 0; background: linear-gradient(135deg, var(--c-bg) 0%, #e8f0ee 100%); }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.review-card { background: var(--c-white); border-radius: var(--radius); padding: 32px; border: 1px solid var(--c-border); transition: var(--transition); position: relative; }
+.review-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.review-card::before { content: '❝'; position: absolute; top: 20px; right: 24px; font-size: 48px; color: var(--c-primary); opacity: 0.1; font-family: var(--font-display); }
+.review-stars { color: var(--c-accent); font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
+.review-text { font-size: 15px; color: var(--c-text); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.review-author { display: flex; align-items: center; gap: 12px; }
+.review-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; background: var(--c-bg); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.review-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.review-name { font-weight: 600; font-size: 15px; } .review-city { font-size: 13px; color: var(--c-text-light); }
+
+/* FAQ */
+.faq-section { padding: 100px 0; background: var(--c-white); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.faq-left .section-label { text-align: left; } .faq-left .section-title { text-align: left; font-size: 36px; }
+.faq-left p { color: var(--c-text-light); margin-top: 16px; font-size: 16px; }
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item { background: var(--c-bg); border-radius: var(--radius); border: 1px solid var(--c-border); overflow: hidden; transition: var(--transition); }
+.faq-item:hover { border-color: var(--c-primary); }
+.faq-question { padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 15px; color: var(--c-primary-dark); background: none; border: none; width: 100%; text-align: left; font-family: var(--font-body); }
+.faq-question .faq-icon { font-size: 20px; color: var(--c-primary); transition: var(--transition); flex-shrink: 0; margin-left: 12px; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-answer-inner { padding: 0 24px 20px; font-size: 15px; color: var(--c-text-light); line-height: 1.7; }
+.faq-item.open .faq-answer { max-height: 300px; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+/* CTA */
+.cta-section { padding: 100px 0; background: linear-gradient(135deg, var(--c-primary-dark), var(--c-primary)); color: white; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: rgba(201,168,76,0.1); }
+.cta-inner { text-align: center; position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.cta-inner .section-label { color: var(--c-accent); } .cta-inner .section-title { color: white; margin-bottom: 20px; } .cta-inner .section-desc { color: rgba(255,255,255,0.7); margin-bottom: 40px; }
+.cta-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; margin: 0 auto; }
+.cta-form input, .cta-form select { padding: 16px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 15px; font-family: var(--font-body); transition: var(--transition); outline: none; }
+.cta-form input::placeholder { color: rgba(255,255,255,0.5); }
+.cta-form input:focus, .cta-form select:focus { border-color: var(--c-accent); background: rgba(255,255,255,0.15); }
+.cta-form select { color: rgba(255,255,255,0.7); } .cta-form select option { color: var(--c-text); background: var(--c-white); }
+.cta-form .btn-accent { grid-column: 1 / -1; justify-content: center; padding: 16px; font-size: 16px; }
+
+/* FOOTER */
+.footer { padding: 60px 0 24px; background: var(--c-bg-dark); color: rgba(255,255,255,0.7); }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand .logo { color: white; margin-bottom: 16px; } .footer-brand .logo-icon { background: var(--c-primary); } .footer-brand .logo-sub { color: rgba(255,255,255,0.5); }
+.footer-desc { font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+.footer-socials { display: flex; gap: 10px; }
+.footer-social { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 16px; transition: var(--transition); }
+.footer-social:hover { background: var(--c-primary); color: white; }
+.footer-col h4 { color: white; font-size: 15px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+.footer-col a { display: block; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; padding: 4px 0; transition: var(--transition); }
+.footer-col a:hover { color: var(--c-accent); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-size: 13px; color: rgba(255,255,255,0.4); }
+
+/* WA FLOAT */
+.wa-float { position: fixed; bottom: 24px; right: 24px; z-index: 999; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: var(--transition); animation: pulse-wa 2s infinite; }
+.wa-float:hover { transform: scale(1.1); }
+@keyframes pulse-wa { 0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,0.6); } }
+
+/* MOBILE NAV */
+.mobile-nav-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(250,249,246,0.98); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+.mobile-nav-overlay.active { display: flex; }
+.mobile-nav-overlay a { font-family: var(--font-display); font-size: 26px; color: var(--c-primary-dark); text-decoration: none; font-weight: 600; }
+.mobile-nav-close { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 32px; cursor: pointer; color: var(--c-text); }
+
+/* LIGHTBOX */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2000; align-items: center; justify-content: center; cursor: pointer; }
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+.lightbox-close { position: absolute; top: 20px; right: 24px; color: white; font-size: 36px; cursor: pointer; background: none; border: none; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .hero h1 { font-size: 36px; } .services-grid { grid-template-columns: repeat(2, 1fr); } .doctors-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: repeat(3, 1fr); } .step-card:nth-child(3)::after { display: none; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); } .pricing-header, .pricing-row { grid-template-columns: 1fr 90px 90px 90px; font-size: 13px; padding: 12px 16px; }
+  .video-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav { display: none; } .burger { display: flex; } .header-phone { display: none; }
+  .hero { padding: 100px 0 60px; } .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-desc { margin: 0 auto 32px; } .hero-btns { justify-content: center; } .hero-stats { justify-content: center; flex-wrap: wrap; gap: 24px; }
+  .hero-visual { order: -1; margin-bottom: 20px; } .hero-float-card { display: none; } .hero h1 { font-size: 28px; }
+  .section-title { font-size: 28px; } .value-grid, .services-grid, .reviews-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .steps-grid { grid-template-columns: 1fr; gap: 8px; } .step-card::after { display: none !important; }
+  .faq-grid { grid-template-columns: 1fr; gap: 32px; } .cta-form { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; } .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .pricing-header, .pricing-row { grid-template-columns: 1fr 65px 65px 65px; padding: 10px 10px; font-size: 11px; }
+  .pricing-category, .pricing-note { padding: 10px; font-size: 12px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); } .gallery-item img { height: 180px; }
+  .certs-grid { grid-template-columns: 1fr; max-width: 400px; } .video-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="header" id="header"><div class="container header-inner">
+  <a href="#" class="logo"><div class="logo-icon">✚</div><div><span class="logo-text">МЦ «Доверие»</span><span class="logo-sub">Многопрофильный медицинский центр</span></div></a>
+  <nav class="nav"><a href="#about">О центре</a><a href="#gallery">Галерея</a><a href="#services">Услуги</a><a href="#doctors">Врачи</a><a href="#pricing">Цены</a><a href="#reviews">Отзывы</a><a href="#contact">Контакты</a></nav>
+  <div class="header-actions"><a href="tel:+70000000000" class="header-phone">8-800-XXX-XX-XX</a><a href="#contact" class="btn btn-primary" style="padding:10px 22px;font-size:14px;">Записаться</a></div>
+  <button class="burger" onclick="document.querySelector('.mobile-nav-overlay').classList.add('active')"><span></span><span></span><span></span></button>
+</div></header>
+
+<div class="mobile-nav-overlay"><button class="mobile-nav-close" onclick="this.parentElement.classList.remove('active')">✕</button>
+  <a href="#about" onclick="this.parentElement.classList.remove('active')">О центре</a><a href="#gallery" onclick="this.parentElement.classList.remove('active')">Галерея</a>
+  <a href="#services" onclick="this.parentElement.classList.remove('active')">Услуги</a><a href="#doctors" onclick="this.parentElement.classList.remove('active')">Врачи</a>
+  <a href="#pricing" onclick="this.parentElement.classList.remove('active')">Цены</a><a href="#reviews" onclick="this.parentElement.classList.remove('active')">Отзывы</a>
+  <a href="#contact" onclick="this.parentElement.classList.remove('active')">Контакты</a>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')"><button class="lightbox-close">✕</button><img id="lightbox-img" src="" alt=""></div>
+
+<!-- HERO --><section class="hero"><div class="container hero-inner">
+  <div class="hero-text">
+    <div class="hero-badge">г. Хэйхэ, Китай</div>
+    <h1>Профессиональная стоматология<br><em>по доступным ценам</em></h1>
+    <p class="hero-desc">Многопрофильный медицинский центр «Доверие» — государственная клиника в г. Хэйхэ с полным спектром стоматологических услуг. Европейское качество, честные цены, сопровождение на русском языке.</p>
+    <div class="hero-btns"><a href="#contact" class="btn btn-primary">Бесплатная консультация</a><a href="#pricing" class="btn btn-outline">Узнать цены</a></div>
+    <div class="hero-stats"><div><div class="hero-stat-num">с 2019</div><div class="hero-stat-label">год открытия</div></div><div><div class="hero-stat-num">3 000+</div><div class="hero-stat-label">пациентов</div></div><div><div class="hero-stat-num">100%</div><div class="hero-stat-label">лицензии</div></div></div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-wrap"><img src="img/photo_3_2026-04-15_21-33-18.jpg" alt="Врачи МЦ Доверие"></div>
+    <div class="hero-float-card top-right"><div class="float-icon green">✓</div><span>Русскоязычное<br>сопровождение</span></div>
+    <div class="hero-float-card bottom-left"><div class="float-icon gold">⭐</div><span>Гослицензия<br>КНР</span></div>
+  </div>
+</div></section>
+
+<!-- VALUES --><section class="value-section"><div class="container">
+  <div class="section-header"><div class="section-label">Почему мы</div><h2 class="section-title">Качество, цена и забота — в каждой детали</h2></div>
+  <div class="value-grid">
+    <div class="value-card"><div class="value-icon v1">💰</div><h3>Выгодные цены</h3><p>Стоимость лечения значительно ниже, чем в российских клиниках. Без скрытых платежей.</p><span class="value-highlight">от 1 000 ₽</span></div>
+    <div class="value-card"><div class="value-icon v2">🤝</div><h3>Полное сопровождение</h3><p>Русскоговорящий куратор от границы до клиники. Помощь с визой, трансфер, проживание.</p><span class="value-highlight">на русском</span></div>
+    <div class="value-card"><div class="value-icon v3">🛡️</div><h3>Государственная клиника</h3><p>Первая городская больница Хэйхэ, открытая при поддержке Минздрава Пекина.</p><span class="value-highlight">гослицензия</span></div>
+  </div>
+</div></section>
+
+<!-- ABOUT --><section class="about-section" id="about"><div class="container about-grid">
+  <div class="about-img-main"><img src="img/photo_2_2026-04-15_21-33-18.jpg" alt="МЦ Доверие"><div class="about-exp-badge"><span class="num">2019</span><span class="label">год открытия</span></div></div>
+  <div class="about-content">
+    <div class="section-label">О центре</div>
+    <h2 class="section-title">Многопрофильный медицинский центр «Доверие»</h2>
+    <p class="about-text">Первая городская больница города Хэйхэ открыта при поддержке Министерства здравоохранения Пекина. На работу приглашены первоклассные врачи и специалисты из Пекина.</p>
+    <p class="about-text">В 2019 году проведено полное переоснащение клиники новым оборудованием и сделан ремонт всех помещений. Центр принимает как китайских граждан, так и иностранных пациентов.</p>
+    <div class="about-features">
+      <div class="about-feature"><div class="about-check">✓</div> Государственные лицензии КНР</div>
+      <div class="about-feature"><div class="about-check">✓</div> Специалисты из Пекина</div>
+      <div class="about-feature"><div class="about-check">✓</div> Новейшее оборудование (2019)</div>
+      <div class="about-feature"><div class="about-check">✓</div> Приём иностранных пациентов</div>
+      <div class="about-feature"><div class="about-check">✓</div> Русскоязычное сопровождение</div>
+    </div>
+    <a href="#contact" class="btn btn-primary">Записаться на приём</a>
+  </div>
+</div></section>
+
+<!-- GALLERY --><section class="gallery-section" id="gallery"><div class="container">
+  <div class="section-header"><div class="section-label">Фотогалерея</div><h2 class="section-title">Наш центр и наши пациенты</h2><p class="section-desc">Современные кабинеты, профессиональные врачи и довольные пациенты</p></div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_1_2026-04-15_21-33-18.jpg" alt="Врач за работой"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_2_2026-04-15_21-33-18.jpg" alt="Лечение"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_3_2026-04-15_21-33-18.jpg" alt="Команда"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_5_2026-04-15_21-33-18.jpg" alt="Пациент"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_6_2026-04-15_21-33-18.jpg" alt="Пациентка"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/clinic-work-3.jpg" alt="Кабинет"><div class="gallery-overlay"><span>🔍</span></div></div>
+  </div>
+</div></section>
+
+<!-- CERTS --><section class="certs-section" id="certs"><div class="container">
+  <div class="section-header"><div class="section-label">Документы</div><h2 class="section-title">Лицензии и сертификаты</h2><p class="section-desc">Государственные лицензии КНР на ведение медицинской деятельности</p></div>
+  <div class="certs-grid">
+    <div class="cert-card" onclick="openLightbox(this)"><img src="img/photo_7_2026-04-15_21-33-18.jpg" alt="Лицензия"><div class="cert-card-label">Лицензия на медицинскую деятельность</div></div>
+    <div class="cert-card" onclick="openLightbox(this)"><img src="img/photo_8_2026-04-15_21-33-18.jpg" alt="Сертификат"><div class="cert-card-label">Сертификат МЦ «Доверие»</div></div>
+  </div>
+</div></section>
+
+<!-- VIDEO --><section class="video-section" id="video"><div class="container">
+  <div class="section-header"><div class="section-label">Видео</div><h2 class="section-title">Наш центр изнутри</h2><p class="section-desc">Экскурсия по клинике, процесс лечения и отзывы</p></div>
+  <div class="video-grid">
+    <!-- ВИДЕО 1: замените .video-thumb содержимое на iframe --><div class="video-card"><div class="video-thumb"><div class="video-play-btn">▶</div></div><div class="video-label">📹 Экскурсия по клинике</div></div>
+    <!-- ВИДЕО 2 --><div class="video-card"><div class="video-thumb"><div class="video-play-btn">▶</div></div><div class="video-label">📹 Процесс протезирования</div></div>
+    <!-- ВИДЕО 3 --><div class="video-card"><div class="video-thumb"><div class="video-play-btn">▶</div></div><div class="video-label">📹 Отзывы пациентов</div></div>
+  </div>
+</div></section>
+
+<!-- SERVICES --><section class="services-section" id="services"><div class="container">
+  <div class="section-header"><div class="section-label">Наши услуги</div><h2 class="section-title">Полный спектр стоматологической помощи</h2></div>
+  <div class="services-grid">
+    <a class="service-card" href="#pricing"><span class="service-emoji">🦷</span><h3>Протезирование</h3><p>Коронки из никель-хрома, титана, кобальто-хрома, циркония</p></a>
+    <a class="service-card" href="#pricing"><span class="service-emoji">📐</span><h3>Имплантация</h3><p>Полная стоимость от 50 000 ₽ включая коронку</p></a>
+    <a class="service-card" href="#pricing"><span class="service-emoji">🔬</span><h3>Лечение каналов</h3><p>Эндодонтическое лечение, депульпация, пломбирование</p></a>
+    <a class="service-card" href="#pricing"><span class="service-emoji">✨</span><h3>Виниры</h3><p>Реставрация передних зубов, коррекция формы</p></a>
+    <a class="service-card" href="#pricing"><span class="service-emoji">🏥</span><h3>Удаление зубов</h3><p>Простое и сложное удаление</p></a>
+    <a class="service-card" href="#pricing"><span class="service-emoji">😃</span><h3>Брекеты</h3><p>Металлические, керамические брекет-системы и капы</p></a>
+    <a class="service-card" href="#pricing"><span class="service-emoji">🧹</span><h3>Чистка и полировка</h3><p>Профессиональная чистка, полировка</p></a>
+    <a class="service-card" href="#pricing"><span class="service-emoji">💎</span><h3>Отбеливание</h3><p>Белоснежное профессиональное отбеливание</p></a>
+  </div>
+</div></section>
+
+<!-- DOCTORS --><section class="doctors-section" id="doctors"><div class="container">
+  <div class="section-header"><div class="section-label">Наша команда</div><h2 class="section-title">Специалисты из Пекина</h2><p class="section-desc">Первоклассные врачи, приглашённые при поддержке Минздрава КНР</p></div>
+  <div class="doctors-grid">
+    <div class="doctor-card"><img class="doctor-photo" src="img/clinic-work-1.jpg" alt="Врач"><div class="doctor-info"><h3>Имя Фамилия</h3><div class="doctor-title">Главный врач · Стоматолог-ортопед</div><p class="doctor-desc">Врач высшей категории. Специализация — протезирование и имплантация. Стажировки в ведущих клиниках Пекина.</p></div></div>
+    <div class="doctor-card"><img class="doctor-photo" src="img/clinic-work-3.jpg" alt="Врач"><div class="doctor-info"><h3>Имя Фамилия</h3><div class="doctor-title">Стоматолог-терапевт · Хирург</div><p class="doctor-desc">Врач высшей категории. Специализация — эндодонтическое лечение, хирургия, эстетическая реставрация.</p></div></div>
+  </div>
+</div></section>
+
+<!-- PRICING --><section class="pricing-section" id="pricing"><div class="container">
+  <div class="section-header"><div class="section-label">Стоимость</div><h2 class="section-title">Прозрачные цены на все услуги</h2><p class="section-desc">Три категории материалов: китайские, японские, немецкие</p></div>
+  <div class="pricing-table">
+    <div class="pricing-header"><span>Услуга</span><span>🇨🇳 Китай</span><span>🇯🇵 Япония</span><span>🇩🇪 Германия</span></div>
+    <div class="pricing-category">Коронки</div>
+    <div class="pricing-row"><div class="pricing-service">Никель-хромовые<small>Бюджетный вариант</small></div><div class="pricing-price">3 500</div><div class="pricing-price">4 500</div><div class="pricing-price">6 500</div></div>
+    <div class="pricing-row"><div class="pricing-service">Титано-кобальтовые<small>Лёгкие, не окисляются</small></div><div class="pricing-price">6 500</div><div class="pricing-price">7 500</div><div class="pricing-price">9 500</div></div>
+    <div class="pricing-row"><div class="pricing-service">Кобальто-хромовые<small>Прочные, биосовместимые</small></div><div class="pricing-price">8 000</div><div class="pricing-price">9 000</div><div class="pricing-price">10 000</div></div>
+    <div class="pricing-row"><div class="pricing-service">Диоксид циркония<small>Премиум, гипоаллергенны</small></div><div class="pricing-price">10 000</div><div class="pricing-price">12 000</div><div class="pricing-price">15 000</div></div>
+    <div class="pricing-category">Имплантация</div>
+    <div class="pricing-row"><div class="pricing-service">Имплант (полный)<small>Стержень + абатмент + коронка</small></div><div class="pricing-price">50 000</div><div class="pricing-price">55 000</div><div class="pricing-price">—</div></div>
+    <div class="pricing-category">Терапия</div>
+    <div class="pricing-row"><div class="pricing-service">Пломбирование</div><div class="pricing-price">1 000</div><div class="pricing-price">2 000</div><div class="pricing-price">3 500</div></div>
+    <div class="pricing-category">Съёмные протезы</div>
+    <div class="pricing-row"><div class="pricing-service">Акриловый протез</div><div class="pricing-price" style="grid-column:span 3;text-align:center">35 000 — 45 000</div></div>
+    <div class="pricing-row"><div class="pricing-service">На стальной фасетке</div><div class="pricing-price" style="grid-column:span 3;text-align:center">45 000 — 48 000</div></div>
+    <div class="pricing-row"><div class="pricing-service">Кобальто-хромовый</div><div class="pricing-price" style="grid-column:span 3;text-align:center">65 000 — 68 000</div></div>
+    <div class="pricing-row"><div class="pricing-service">Бюгельный на микрозамках<small>Немецкие материалы</small></div><div class="pricing-price" style="grid-column:span 3;text-align:center">65 000 — 85 000</div></div>
+    <div class="pricing-category">Эстетика</div>
+    <div class="pricing-row"><div class="pricing-service">Чистка зубов</div><div class="pricing-price" style="grid-column:span 3;text-align:center">от 2 500</div></div>
+    <div class="pricing-row"><div class="pricing-service">Полировка</div><div class="pricing-price" style="grid-column:span 3;text-align:center">от 1 500</div></div>
+    <div class="pricing-row"><div class="pricing-service">Отбеливание</div><div class="pricing-price" style="grid-column:span 3;text-align:center">от 25 000</div></div>
+    <div class="pricing-row"><div class="pricing-service">Виниры</div><div class="pricing-price" style="grid-column:span 3;text-align:center">20 000 — 35 000</div></div>
+    <div class="pricing-note">💡 Цены в рублях. Точная стоимость — после осмотра. Отправьте снимок через WhatsApp для бесплатной оценки!</div>
+  </div>
+  <div style="text-align:center;margin-top:32px;"><a href="#contact" class="btn btn-primary">Узнать точную стоимость</a></div>
+</div></section>
+
+<!-- STEPS --><section class="steps-section"><div class="container">
+  <div class="section-header"><div class="section-label">Как это работает</div><h2 class="section-title">5 шагов к красивой улыбке</h2></div>
+  <div class="steps-grid">
+    <div class="step-card"><div class="step-num">1</div><h3>Заявка</h3><p>Оставьте заявку или напишите в WhatsApp. Отправьте снимок — оценим бесплатно.</p></div>
+    <div class="step-card"><div class="step-num">2</div><h3>Встреча</h3><p>Встретим в Благовещенске, поможем с визой и переправой через границу.</p></div>
+    <div class="step-card"><div class="step-num">3</div><h3>Сопровождение</h3><p>Русскоговорящий куратор сопроводит и будет рядом весь период лечения.</p></div>
+    <div class="step-card"><div class="step-num">4</div><h3>Лечение</h3><p>Диагностика, план, работа — всё в одном центре с новейшим оборудованием.</p></div>
+    <div class="step-card"><div class="step-num">5</div><h3>Результат</h3><p>Красивая улыбка с гарантией. Проводим обратно через границу.</p></div>
+  </div>
+</div></section>
+
+<!-- REVIEWS --><section class="reviews-section" id="reviews"><div class="container">
+  <div class="section-header"><div class="section-label">Отзывы</div><h2 class="section-title">Что говорят наши пациенты</h2></div>
+  <div class="reviews-grid">
+    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Поставила 8 циркониевых коронок — результат отличный! Встретили на границе, всё время рядом был переводчик. Цены в разы ниже, чем в Благовещенске.</p><div class="review-author"><div class="review-avatar"><img src="img/patient-2.jpg" alt=""></div><div><div class="review-name">Елена В.</div><div class="review-city">Благовещенск</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Ездил на имплантацию — 2 импланта + коронки. Весь процесс занял около недели. Клиника новая, оборудование современное, врачи профессионалы.</p><div class="review-author"><div class="review-avatar"><img src="img/patient-1.jpg" alt=""></div><div><div class="review-name">Михаил К.</div><div class="review-city">Благовещенск</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Боялась ехать в Китай лечить зубы, но всё оказалось намного проще. Куратор был рядом постоянно, в клинике чисто и современно. Сэкономила больше половины!</p><div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Анна С.</div><div class="review-city">Свободный</div></div></div></div>
+  </div>
+</div></section>
+
+<!-- FAQ --><section class="faq-section" id="faq"><div class="container faq-grid">
+  <div class="faq-left"><div class="section-label">Вопросы</div><h2 class="section-title">Часто задаваемые вопросы</h2><p>Не нашли ответ? Напишите в WhatsApp — ответим за 5 минут!</p><div style="margin-top:32px"><a href="#contact" class="btn btn-primary">Задать вопрос</a></div></div>
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Как попасть в клинику из Благовещенска?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Клиника в г. Хэйхэ — прямо через границу от Благовещенска. Мы встретим, поможем с визой (бесплатно), организуем переправу. Пересечение границы — 1–2 часа.</div></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Как узнать точную стоимость?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Отправьте панорамный снимок через WhatsApp — бесплатно составим план лечения с ценой. Точная стоимость — после осмотра в клинике.</div></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Какие материалы используются?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Три категории: китайские (доступные), японские (оптимум) и немецкие (премиум). Все сертифицированы.</div></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Сколько времени занимает лечение?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Простое лечение — 1–2 дня. Коронки — 3–7 дней. Имплантация — от 3 дней (может потребоваться повторный визит).</div></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Какую валюту принимаете?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Рубли, юани, доллары, евро. Наличными или переводом.</div></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Есть ли гарантия?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Да, гарантия на все работы. Условия зависят от типа лечения и материалов — обсуждаем до начала.</div></div></div>
+  </div>
+</div></section>
+
+<!-- CTA --><section class="cta-section" id="contact"><div class="container"><div class="cta-inner">
+  <div class="section-label">Запись на приём</div><h2 class="section-title">Заполните заявку<br>на бесплатную консультацию</h2><p class="section-desc">Менеджер свяжется в течение 5 минут и поможет спланировать поездку</p>
+  <form class="cta-form" onsubmit="event.preventDefault();alert('Спасибо! Мы свяжемся с вами в ближайшее время.');">
+    <input type="text" placeholder="Ваше имя" required><input type="tel" placeholder="Телефон" required>
+    <input type="text" placeholder="Город" value="Благовещенск">
+    <select><option>Выберите направление</option><option>Протезирование</option><option>Имплантация</option><option>Лечение зубов</option><option>Виниры</option><option>Брекеты</option><option>Чистка / отбеливание</option><option>Другое</option></select>
+    <button type="submit" class="btn btn-accent">Отправить заявку →</button>
+  </form>
+</div></div></section>
+
+<!-- FOOTER --><footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon">✚</div><div><span class="logo-text" style="color:white">МЦ «Доверие»</span><span class="logo-sub">Многопрофильный медицинский центр</span></div></a><p class="footer-desc">Профессиональная стоматология в г. Хэйхэ (Китай). Полный спектр услуг, русскоязычное сопровождение, честные цены.</p><div class="footer-socials"><a href="#" class="footer-social">TG</a><a href="#" class="footer-social">WA</a><a href="#" class="footer-social">VK</a></div></div>
+    <div class="footer-col"><h4>Услуги</h4><a href="#services">Протезирование</a><a href="#services">Имплантация</a><a href="#services">Лечение зубов</a><a href="#services">Виниры</a><a href="#services">Брекеты</a><a href="#services">Отбеливание</a></div>
+    <div class="footer-col"><h4>Информация</h4><a href="#about">О центре</a><a href="#doctors">Врачи</a><a href="#pricing">Цены</a><a href="#reviews">Отзывы</a><a href="#certs">Лицензии</a><a href="#faq">FAQ</a></div>
+    <div class="footer-col"><h4>Контакты</h4><a href="tel:+70000000000">8-800-XXX-XX-XX</a><a href="tel:+70000000000">+7 (XXX) XXX-XX-XX</a><a href="mailto:info@doctor-ten.com">info@doctor-ten.com</a><a href="https://www.doctor-ten.com" target="_blank">www.doctor-ten.com</a><a href="#">г. Хэйхэ, ул. Чжунян, #614</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2024 МЦ «Доверие». Все права защищены. 18+</span><a href="#" style="color:rgba(255,255,255,0.5);text-decoration:none;">Политика конфиденциальности</a></div>
+</div></footer>
+
+<a href="https://wa.me/70000000000" class="wa-float" target="_blank" title="WhatsApp">💬</a>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>20)});
+function toggleFaq(b){const i=b.parentElement,o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open')}
+function openLightbox(el){const img=el.querySelector('img');if(img){document.getElementById('lightbox-img').src=img.src;document.getElementById('lightbox').classList.add('active')}}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)'}})},{threshold:0.1});
+document.querySelectorAll('.value-card,.service-card,.doctor-card,.review-card,.step-card,.gallery-item,.cert-card,.video-card').forEach((el,i)=>{el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition=`opacity .6s ease ${i*.05}s, transform .6s ease ${i*.05}s`;obs.observe(el)});
+</script>
+</body>
+</html>
