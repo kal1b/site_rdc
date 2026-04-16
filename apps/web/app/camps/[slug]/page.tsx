@@ -1,0 +1,2 @@
+const sections = ['О площадке','Программы и смены','Цены/Путёвки','Документы','Сотрудники/Преподаватели','Инфраструктура','Фото и видео','Как добраться/Контакты','FAQ'];
+export default function CampDetail({ params }: { params: { slug: string } }) { return <div className="space-y-4">{sections.map(s=><section id={encodeURIComponent(s)} key={s} className="card"><h2 className="font-medium">{s}</h2><p>{params.slug}</p></section>)}</div>; }

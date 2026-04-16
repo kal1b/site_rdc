@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole { PARENT OPERATOR ADMIN }
+enum CampType { CAMP CENTER SANATORIUM }
+enum ShiftStatus { DRAFT PUBLISHED SOLDOUT }
+enum ApplicationStatus { DRAFT SUBMITTED APPROVED REJECTED PAID CANCELLED }
+enum DocumentStatus { REQUIRED UPLOADED VERIFIED REJECTED }
+enum PaymentProvider { TEST YOOKASSA }
+enum PaymentStatus { NEW PENDING SUCCEEDED CANCELED REFUNDED }
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(PARENT)
+  createdAt    DateTime @default(now())
+  applications Application[]
+}
+
+model Camp {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  type             CampType
+  shortDescription String
+  contactsJson     Json
+  locationJson     Json
+  isActive         Boolean  @default(true)
+  shifts           Shift[]
+}
+
+model Shift {
+  id             String      @id @default(cuid())
+  campId         String
+  camp           Camp        @relation(fields: [campId], references: [id])
+  title          String
+  dateStart      DateTime
+  dateEnd        DateTime
+  ageMin         Int
+  ageMax         Int
+  themeTags      String[]
+  price          Int
+  quotaTotal     Int
+  quotaAvailable Int
+  status         ShiftStatus @default(DRAFT)
+  applications   Application[]
+}
+
+model Application {
+  id        String            @id @default(cuid())
+  userId    String
+  user      User              @relation(fields: [userId], references: [id])
+  shiftId   String
+  shift     Shift             @relation(fields: [shiftId], references: [id])
+  status    ApplicationStatus @default(DRAFT)
+  childJson Json
+  parentJson Json
+  createdAt DateTime          @default(now())
+  documents ApplicationDocument[]
+  payments Payment[]
+}
+
+model ApplicationDocument {
+  id            String         @id @default(cuid())
+  applicationId String
+  application   Application    @relation(fields: [applicationId], references: [id])
+  typeKey       String
+  status        DocumentStatus @default(REQUIRED)
+  fileKey       String?
+  comment       String?
+}
+
+model Payment {
+  id                String          @id @default(cuid())
+  applicationId     String
+  application       Application     @relation(fields: [applicationId], references: [id])
+  provider          PaymentProvider @default(TEST)
+  amount            Int
+  currency          String
+  status            PaymentStatus   @default(NEW)
+  providerPaymentId String?
+  createdAt         DateTime        @default(now())
+}
