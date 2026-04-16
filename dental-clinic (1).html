@@ -249,6 +249,22 @@ img { max-width: 100%; height: auto; display: block; }
 .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
 .lightbox-close { position: absolute; top: 20px; right: 24px; color: white; font-size: 36px; cursor: pointer; background: none; border: none; }
 
+
+.video-thumb video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
+.video-card.vertical .video-thumb { aspect-ratio: 9/16; }
+.video-card.horizontal { grid-column: span 2; }
+.video-card.horizontal .video-thumb { aspect-ratio: 16/9; }
+.admin-toggle { position: fixed; left: 24px; bottom: 24px; z-index: 1200; width: 56px; height: 56px; border-radius: 50%; border: none; background: var(--c-primary-dark); color: #fff; font-size: 24px; cursor: pointer; box-shadow: var(--shadow-lg); }
+.admin-panel { position: fixed; top: 90px; right: 24px; width: min(420px, calc(100vw - 48px)); max-height: calc(100vh - 120px); overflow:auto; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index: 1300; padding: 16px; display: none; }
+.admin-panel.open { display: block; }
+.admin-panel h3 { margin-bottom: 12px; color: var(--c-primary-dark); }
+.admin-panel label { font-size: 13px; font-weight: 600; margin-top: 8px; display:block; }
+.admin-panel input, .admin-panel textarea { width:100%; margin-top:4px; padding:10px; border:1px solid var(--c-border); border-radius:8px; font-family:var(--font-body); }
+.admin-actions { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+.admin-actions button { border:none; padding:10px 12px; border-radius:8px; cursor:pointer; font-weight:600; }
+.admin-save { background: var(--c-primary); color:#fff; }
+.admin-reset { background: #eee; }
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .hero h1 { font-size: 36px; } .services-grid { grid-template-columns: repeat(2, 1fr); } .doctors-grid { grid-template-columns: 1fr; }
@@ -278,7 +294,7 @@ img { max-width: 100%; height: auto; display: block; }
 <header class="header" id="header"><div class="container header-inner">
   <a href="#" class="logo"><div class="logo-icon">✚</div><div><span class="logo-text">МЦ «Доверие»</span><span class="logo-sub">Многопрофильный медицинский центр</span></div></a>
   <nav class="nav"><a href="#about">О центре</a><a href="#gallery">Галерея</a><a href="#services">Услуги</a><a href="#doctors">Врачи</a><a href="#pricing">Цены</a><a href="#reviews">Отзывы</a><a href="#contact">Контакты</a></nav>
-  <div class="header-actions"><a href="tel:+70000000000" class="header-phone">8-800-XXX-XX-XX</a><a href="#contact" class="btn btn-primary" style="padding:10px 22px;font-size:14px;">Записаться</a></div>
+  <div class="header-actions"><a href="tel:+79145527484" class="header-phone" data-admin="phone-text">+7 914 552-74-84</a><a href="#contact" class="btn btn-primary" style="padding:10px 22px;font-size:14px;">Записаться</a></div>
   <button class="burger" onclick="document.querySelector('.mobile-nav-overlay').classList.add('active')"><span></span><span></span><span></span></button>
 </div></header>
 
@@ -335,13 +351,12 @@ img { max-width: 100%; height: auto; display: block; }
 
 <!-- GALLERY --><section class="gallery-section" id="gallery"><div class="container">
   <div class="section-header"><div class="section-label">Фотогалерея</div><h2 class="section-title">Наш центр и наши пациенты</h2><p class="section-desc">Современные кабинеты, профессиональные врачи и довольные пациенты</p></div>
-  <div class="gallery-grid">
-    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_1_2026-04-15_21-33-18.jpg" alt="Врач за работой"><div class="gallery-overlay"><span>🔍</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_2_2026-04-15_21-33-18.jpg" alt="Лечение"><div class="gallery-overlay"><span>🔍</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_3_2026-04-15_21-33-18.jpg" alt="Команда"><div class="gallery-overlay"><span>🔍</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_5_2026-04-15_21-33-18.jpg" alt="Пациент"><div class="gallery-overlay"><span>🔍</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_6_2026-04-15_21-33-18.jpg" alt="Пациентка"><div class="gallery-overlay"><span>🔍</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/clinic-work-3.jpg" alt="Кабинет"><div class="gallery-overlay"><span>🔍</span></div></div>
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_1_2026-04-15_21-33-18.jpg" alt="Фото 1"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_2_2026-04-15_21-33-18.jpg" alt="Фото 2"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_3_2026-04-15_21-33-18.jpg" alt="Фото 3"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_5_2026-04-15_21-33-18.jpg" alt="Фото 4"><div class="gallery-overlay"><span>🔍</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(this)"><img src="img/photo_6_2026-04-15_21-33-18.jpg" alt="Фото 5"><div class="gallery-overlay"><span>🔍</span></div></div>
   </div>
 </div></section>
 
@@ -355,10 +370,12 @@ img { max-width: 100%; height: auto; display: block; }
 
 <!-- VIDEO --><section class="video-section" id="video"><div class="container">
   <div class="section-header"><div class="section-label">Видео</div><h2 class="section-title">Наш центр изнутри</h2><p class="section-desc">Экскурсия по клинике, процесс лечения и отзывы</p></div>
-  <div class="video-grid">
-    <!-- ВИДЕО 1: замените .video-thumb содержимое на iframe --><div class="video-card"><div class="video-thumb"><div class="video-play-btn">▶</div></div><div class="video-label">📹 Экскурсия по клинике</div></div>
-    <!-- ВИДЕО 2 --><div class="video-card"><div class="video-thumb"><div class="video-play-btn">▶</div></div><div class="video-label">📹 Процесс протезирования</div></div>
-    <!-- ВИДЕО 3 --><div class="video-card"><div class="video-thumb"><div class="video-play-btn">▶</div></div><div class="video-label">📹 Отзывы пациентов</div></div>
+  <div class="video-grid" id="video-grid">
+    <div class="video-card horizontal"><div class="video-thumb"><video controls preload="metadata" src="vid/center-tour.mp4"></video></div><div class="video-label">🎬 Экскурсия по нашему центру</div></div>
+    <div class="video-card vertical"><div class="video-thumb"><video controls preload="metadata" src="vid/center-1.mp4"></video></div><div class="video-label">📱 О центре</div></div>
+    <div class="video-card vertical"><div class="video-thumb"><video controls preload="metadata" src="vid/center-2.mp4"></video></div><div class="video-label">📱 О центре</div></div>
+    <div class="video-card vertical"><div class="video-thumb"><video controls preload="metadata" src="vid/center-3.mp4"></video></div><div class="video-label">📱 О центре</div></div>
+    <div class="video-card vertical"><div class="video-thumb"><video controls preload="metadata" src="vid/center-4.mp4"></video></div><div class="video-label">📱 О центре</div></div>
   </div>
 </div></section>
 
@@ -426,8 +443,8 @@ img { max-width: 100%; height: auto; display: block; }
 <!-- REVIEWS --><section class="reviews-section" id="reviews"><div class="container">
   <div class="section-header"><div class="section-label">Отзывы</div><h2 class="section-title">Что говорят наши пациенты</h2></div>
   <div class="reviews-grid">
-    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Поставила 8 циркониевых коронок — результат отличный! Встретили на границе, всё время рядом был переводчик. Цены в разы ниже, чем в Благовещенске.</p><div class="review-author"><div class="review-avatar"><img src="img/patient-2.jpg" alt=""></div><div><div class="review-name">Елена В.</div><div class="review-city">Благовещенск</div></div></div></div>
-    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Ездил на имплантацию — 2 импланта + коронки. Весь процесс занял около недели. Клиника новая, оборудование современное, врачи профессионалы.</p><div class="review-author"><div class="review-avatar"><img src="img/patient-1.jpg" alt=""></div><div><div class="review-name">Михаил К.</div><div class="review-city">Благовещенск</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Поставила 8 циркониевых коронок — результат отличный! Встретили на границе, всё время рядом был переводчик. Цены в разы ниже, чем в Благовещенске.</p><div class="review-author"><div class="review-avatar">😊</div><div><div class="review-name">Елена В.</div><div class="review-city">Благовещенск</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Ездил на имплантацию — 2 импланта + коронки. Весь процесс занял около недели. Клиника новая, оборудование современное, врачи профессионалы.</p><div class="review-author"><div class="review-avatar">👍</div><div><div class="review-name">Михаил К.</div><div class="review-city">Благовещенск</div></div></div></div>
     <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Боялась ехать в Китай лечить зубы, но всё оказалось намного проще. Куратор был рядом постоянно, в клинике чисто и современно. Сэкономила больше половины!</p><div class="review-author"><div class="review-avatar">👩</div><div><div class="review-name">Анна С.</div><div class="review-city">Свободный</div></div></div></div>
   </div>
 </div></section>
@@ -446,25 +463,60 @@ img { max-width: 100%; height: auto; display: block; }
 
 <!-- CTA --><section class="cta-section" id="contact"><div class="container"><div class="cta-inner">
   <div class="section-label">Запись на приём</div><h2 class="section-title">Заполните заявку<br>на бесплатную консультацию</h2><p class="section-desc">Менеджер свяжется в течение 5 минут и поможет спланировать поездку</p>
-  <form class="cta-form" onsubmit="event.preventDefault();alert('Спасибо! Мы свяжемся с вами в ближайшее время.');">
-    <input type="text" placeholder="Ваше имя" required><input type="tel" placeholder="Телефон" required>
-    <input type="text" placeholder="Город" value="Благовещенск">
-    <select><option>Выберите направление</option><option>Протезирование</option><option>Имплантация</option><option>Лечение зубов</option><option>Виниры</option><option>Брекеты</option><option>Чистка / отбеливание</option><option>Другое</option></select>
+  <form class="cta-form" id="lead-form">
+    <input type="text" name="name" placeholder="Ваше имя" required>
+    <input type="tel" name="phone" placeholder="Телефон" required>
+    <input type="text" name="city" placeholder="Город" value="Благовещенск">
+    <select name="service" required><option value="">Выберите направление</option><option>Протезирование</option><option>Имплантация</option><option>Лечение зубов</option><option>Виниры</option><option>Брекеты</option><option>Чистка / отбеливание</option><option>Другое</option></select>
+    <textarea name="comment" placeholder="Комментарий (необязательно)" style="grid-column:1 / -1;padding:16px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:white;font-size:15px;font-family:var(--font-body);min-height:96px;"></textarea>
     <button type="submit" class="btn btn-accent">Отправить заявку →</button>
   </form>
+  <p id="form-status" style="margin-top:14px;color:rgba(255,255,255,0.8);font-size:14px;"></p>
 </div></div></section>
 
 <!-- FOOTER --><footer class="footer"><div class="container">
   <div class="footer-grid">
-    <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon">✚</div><div><span class="logo-text" style="color:white">МЦ «Доверие»</span><span class="logo-sub">Многопрофильный медицинский центр</span></div></a><p class="footer-desc">Профессиональная стоматология в г. Хэйхэ (Китай). Полный спектр услуг, русскоязычное сопровождение, честные цены.</p><div class="footer-socials"><a href="#" class="footer-social">TG</a><a href="#" class="footer-social">WA</a><a href="#" class="footer-social">VK</a></div></div>
+    <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon">✚</div><div><span class="logo-text" style="color:white">МЦ «Доверие»</span><span class="logo-sub">Многопрофильный медицинский центр</span></div></a><p class="footer-desc">Профессиональная стоматология в г. Хэйхэ (Китай). Полный спектр услуг, русскоязычное сопровождение, честные цены.</p><div class="footer-socials"><a href="https://t.me/kal1b" class="footer-social" target="_blank" rel="noopener">TG</a><a href="https://wa.me/79145527484" class="footer-social" target="_blank" rel="noopener">WA</a><a href="https://vk.com/kal1b" class="footer-social" target="_blank" rel="noopener">VK</a></div></div>
     <div class="footer-col"><h4>Услуги</h4><a href="#services">Протезирование</a><a href="#services">Имплантация</a><a href="#services">Лечение зубов</a><a href="#services">Виниры</a><a href="#services">Брекеты</a><a href="#services">Отбеливание</a></div>
     <div class="footer-col"><h4>Информация</h4><a href="#about">О центре</a><a href="#doctors">Врачи</a><a href="#pricing">Цены</a><a href="#reviews">Отзывы</a><a href="#certs">Лицензии</a><a href="#faq">FAQ</a></div>
-    <div class="footer-col"><h4>Контакты</h4><a href="tel:+70000000000">8-800-XXX-XX-XX</a><a href="tel:+70000000000">+7 (XXX) XXX-XX-XX</a><a href="mailto:info@doctor-ten.com">info@doctor-ten.com</a><a href="https://www.doctor-ten.com" target="_blank">www.doctor-ten.com</a><a href="#">г. Хэйхэ, ул. Чжунян, #614</a></div>
+    <div class="footer-col"><h4>Контакты</h4><a href="tel:+79145527484">+7 914 552-74-84</a><a href="mailto:kirilov110@gmail.com">kirilov110@gmail.com</a><a href="https://t.me/kal1b" target="_blank" rel="noopener">t.me/kal1b</a><a href="https://wa.me/79145527484" target="_blank" rel="noopener">wa.me/79145527484</a><a href="#">г. Хэйхэ, ул. Чжунян, #614</a></div>
   </div>
   <div class="footer-bottom"><span>© 2024 МЦ «Доверие». Все права защищены. 18+</span><a href="#" style="color:rgba(255,255,255,0.5);text-decoration:none;">Политика конфиденциальности</a></div>
 </div></footer>
 
-<a href="https://wa.me/70000000000" class="wa-float" target="_blank" title="WhatsApp">💬</a>
+<a href="https://wa.me/79145527484" class="wa-float" target="_blank" title="WhatsApp">💬</a>
+
+
+<button class="admin-toggle" type="button" title="Админ-панель" onclick="toggleAdminPanel()">⚙️</button>
+<div class="admin-panel" id="admin-panel">
+  <h3>Админ-панель сайта</h3>
+  <p style="font-size:13px;color:var(--c-text-light);margin-bottom:10px;">Можно менять контакты, фото и видео без редактирования кода. Данные сохраняются в браузере.</p>
+  <label>Телефон
+    <input id="admin-phone" value="+79145527484">
+  </label>
+  <label>Email заявок
+    <input id="admin-email" value="kirilov110@gmail.com">
+  </label>
+  <label>Ссылка Telegram
+    <input id="admin-tg" value="https://t.me/kal1b">
+  </label>
+  <label>Ссылка WhatsApp
+    <input id="admin-wa" value="https://wa.me/79145527484">
+  </label>
+  <label>Ссылка VK
+    <input id="admin-vk" value="https://vk.com/kal1b">
+  </label>
+  <label>Видео (5 шт., через запятую)
+    <textarea id="admin-videos">vid/center-tour.mp4, vid/center-1.mp4, vid/center-2.mp4, vid/center-3.mp4, vid/center-4.mp4</textarea>
+  </label>
+  <label>Фото галереи (5 шт., через запятую)
+    <textarea id="admin-gallery">img/photo_1_2026-04-15_21-33-18.jpg, img/photo_2_2026-04-15_21-33-18.jpg, img/photo_3_2026-04-15_21-33-18.jpg, img/photo_5_2026-04-15_21-33-18.jpg, img/photo_6_2026-04-15_21-33-18.jpg</textarea>
+  </label>
+  <div class="admin-actions">
+    <button class="admin-save" type="button" onclick="saveAdminSettings()">Сохранить</button>
+    <button class="admin-reset" type="button" onclick="resetAdminSettings()">Сбросить</button>
+  </div>
+</div>
 
 <script>
 window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>20)});
@@ -472,6 +524,121 @@ function toggleFaq(b){const i=b.parentElement,o=i.classList.contains('open');doc
 function openLightbox(el){const img=el.querySelector('img');if(img){document.getElementById('lightbox-img').src=img.src;document.getElementById('lightbox').classList.add('active')}}
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)'}})},{threshold:0.1});
 document.querySelectorAll('.value-card,.service-card,.doctor-card,.review-card,.step-card,.gallery-item,.cert-card,.video-card').forEach((el,i)=>{el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition=`opacity .6s ease ${i*.05}s, transform .6s ease ${i*.05}s`;obs.observe(el)});
+
+const SITE_SETTINGS_KEY = 'trust-center-site-settings-v1';
+const DEFAULT_SETTINGS = {
+  phone: '+79145527484',
+  email: 'kirilov110@gmail.com',
+  tg: 'https://t.me/kal1b',
+  wa: 'https://wa.me/79145527484',
+  vk: 'https://vk.com/kal1b',
+  videos: ['vid/center-tour.mp4','vid/center-1.mp4','vid/center-2.mp4','vid/center-3.mp4','vid/center-4.mp4'],
+  gallery: ['img/photo_1_2026-04-15_21-33-18.jpg','img/photo_2_2026-04-15_21-33-18.jpg','img/photo_3_2026-04-15_21-33-18.jpg','img/photo_5_2026-04-15_21-33-18.jpg','img/photo_6_2026-04-15_21-33-18.jpg']
+};
+let settings = {...DEFAULT_SETTINGS};
+function normalizePhone(phone){return phone.replace(/[^\d+]/g,'');}
+function loadAdminSettings(){
+  try { const saved = JSON.parse(localStorage.getItem(SITE_SETTINGS_KEY) || '{}'); settings = {...DEFAULT_SETTINGS, ...saved}; } catch(e) { settings = {...DEFAULT_SETTINGS}; }
+  applySettings();
+  bindAdminFields();
+}
+function applySettings(){
+  const tel = normalizePhone(settings.phone);
+  document.querySelectorAll('.header-phone,[href^="tel:+7"]').forEach(el => { el.href = `tel:${tel}`; el.textContent = settings.phone; });
+  const waFloat = document.querySelector('.wa-float'); if (waFloat) waFloat.href = settings.wa;
+  document.querySelectorAll('.footer-social').forEach((el, idx)=>{
+    const map = [settings.tg, settings.wa, settings.vk];
+    el.href = map[idx] || '#';
+  });
+  const contactCol = document.querySelector('.footer-col:last-child');
+  if(contactCol){
+    const links = contactCol.querySelectorAll('a');
+    if(links[0]) {links[0].href = `tel:${tel}`; links[0].textContent = settings.phone;}
+    if(links[1]) {links[1].href = `mailto:${settings.email}`; links[1].textContent = settings.email;}
+    if(links[2]) {links[2].href = settings.tg; links[2].textContent = settings.tg.replace('https://','');}
+    if(links[3]) {links[3].href = settings.wa; links[3].textContent = settings.wa.replace('https://','');}
+  }
+  const videos = document.querySelectorAll('#video-grid video');
+  settings.videos.slice(0,5).forEach((src,i)=>{ if(videos[i]) videos[i].src = src.trim(); });
+  const gallery = document.getElementById('gallery-grid');
+  if (gallery && settings.gallery.length){
+    gallery.innerHTML = settings.gallery.slice(0,5).map((src,i)=>`<div class="gallery-item" onclick="openLightbox(this)"><img src="${src.trim()}" alt="Фото ${i+1}"><div class="gallery-overlay"><span>🔍</span></div></div>`).join('');
+  }
+}
+function bindAdminFields(){
+  document.getElementById('admin-phone').value = settings.phone;
+  document.getElementById('admin-email').value = settings.email;
+  document.getElementById('admin-tg').value = settings.tg;
+  document.getElementById('admin-wa').value = settings.wa;
+  document.getElementById('admin-vk').value = settings.vk;
+  document.getElementById('admin-videos').value = settings.videos.join(', ');
+  document.getElementById('admin-gallery').value = settings.gallery.join(', ');
+}
+function toggleAdminPanel(){ document.getElementById('admin-panel').classList.toggle('open'); }
+function saveAdminSettings(){
+  settings.phone = document.getElementById('admin-phone').value.trim();
+  settings.email = document.getElementById('admin-email').value.trim();
+  settings.tg = document.getElementById('admin-tg').value.trim();
+  settings.wa = document.getElementById('admin-wa').value.trim();
+  settings.vk = document.getElementById('admin-vk').value.trim();
+  settings.videos = document.getElementById('admin-videos').value.split(',').map(v=>v.trim()).filter(Boolean).slice(0,5);
+  settings.gallery = document.getElementById('admin-gallery').value.split(',').map(v=>v.trim()).filter(Boolean).slice(0,5);
+  localStorage.setItem(SITE_SETTINGS_KEY, JSON.stringify(settings));
+  applySettings();
+  alert('Настройки сохранены.');
+}
+function resetAdminSettings(){
+  localStorage.removeItem(SITE_SETTINGS_KEY);
+  settings = {...DEFAULT_SETTINGS};
+  applySettings();
+  bindAdminFields();
+  alert('Настройки сброшены к значениям по умолчанию.');
+}
+const leadForm = document.getElementById('lead-form');
+if (leadForm){
+  leadForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(leadForm);
+    const payload = {
+      name: formData.get('name'),
+      phone: formData.get('phone'),
+      city: formData.get('city'),
+      service: formData.get('service'),
+      comment: formData.get('comment') || '—',
+      page: location.href,
+      createdAt: new Date().toLocaleString('ru-RU')
+    };
+    const status = document.getElementById('form-status');
+    status.textContent = 'Отправляем заявку...';
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(settings.email)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Новая заявка с сайта МЦ «Доверие»',
+          _template: 'table',
+          _captcha: 'false',
+          'Имя': payload.name,
+          'Телефон': payload.phone,
+          'Город': payload.city,
+          'Направление': payload.service,
+          'Комментарий': payload.comment,
+          'Страница': payload.page,
+          'Дата и время': payload.createdAt
+        })
+      });
+      if (!res.ok) throw new Error('send_failed');
+      status.textContent = '✅ Заявка отправлена. Мы скоро с вами свяжемся.';
+      leadForm.reset();
+    } catch (e) {
+      const body = encodeURIComponent(`Новая заявка с сайта\nИмя: ${payload.name}\nТелефон: ${payload.phone}\nГород: ${payload.city}\nНаправление: ${payload.service}\nКомментарий: ${payload.comment}\nДата: ${payload.createdAt}`);
+      window.location.href = `mailto:${settings.email}?subject=${encodeURIComponent('Новая заявка с сайта МЦ «Доверие»')}&body=${body}`;
+      status.textContent = '⚠️ Не удалось отправить автоматически. Открыли почтовый клиент для отправки письма.';
+    }
+  });
+}
+loadAdminSettings();
+
 </script>
 </body>
 </html>
